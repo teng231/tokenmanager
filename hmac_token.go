@@ -20,8 +20,8 @@ func CreateHMACToken(secret string) (*HMACToken, error) {
 	if secret == "" {
 		return nil, errors.New(E_not_found_secret)
 	}
-	err := mgr.SetSecret(secret)
-	return mgr, err
+	mgr.secret = secret
+	return mgr, nil
 }
 
 // SetSecret is push privatekey to Helper
