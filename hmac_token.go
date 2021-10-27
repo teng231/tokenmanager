@@ -1,6 +1,7 @@
 package tokenmanager
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -37,11 +38,17 @@ func (t *HMACToken) SetSecret(path string) error {
 // GenerateHmacToken is create token with secret
 func (t *HMACToken) GenerateHmacToken(payload interface{}, duration time.Duration) (string, error) {
 	//  make header use algorithm SHA 256
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"exp":     time.Now().Add(duration).Unix(),
-		"iat":     time.Now().Unix(),
-		"payload": payload,
-	})
+	claims := jwt.MapClaims{}
+	bin, err := json.Marshal(payload)
+	if err != nil {
+		return "", err
+	}
+	if err := json.Unmarshal(bin, &claims); err != nil {
+		return "", err
+	}
+	claims["exp"] = time.Now().Add(duration).Unix()
+	claims["iat"] = time.Now().Unix()
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString([]byte(t.secret))
 }
 

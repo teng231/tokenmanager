@@ -32,7 +32,7 @@ func TestParseHmacToken(t *testing.T) {
 		log.Print(err)
 		t.Fail()
 	}
-	bin, err := json.Marshal(extractor["payload"])
+	bin, err := json.Marshal(extractor)
 	if err != nil {
 		t.Fail()
 	}

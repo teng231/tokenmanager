@@ -2,6 +2,7 @@ package tokenmanager
 
 import (
 	"crypto/rsa"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -63,10 +64,16 @@ func (t *RSAToken) GenerateToken(payload interface{}, duration time.Duration) (s
 	//  make header use algorithm RSA 256
 	token := jwt.New(jwt.SigningMethodRS256)
 	// make payload
-	claims := make(jwt.MapClaims)
+	claims := jwt.MapClaims{}
+	bin, err := json.Marshal(payload)
+	if err != nil {
+		return "", err
+	}
+	if err := json.Unmarshal(bin, &claims); err != nil {
+		return "", err
+	}
 	claims["exp"] = time.Now().Add(duration).Unix()
 	claims["iat"] = time.Now().Unix()
-	claims["payload"] = payload
 	token.Claims = claims
 	return token.SignedString(t.priv)
 }
