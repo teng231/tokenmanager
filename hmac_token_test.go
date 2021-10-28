@@ -22,7 +22,7 @@ func TestGenHmacToken(t *testing.T) {
 
 func TestParseHmacToken(t *testing.T) {
 	tk := `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzIxMDg3MTcsImlhdCI6MTYzMjEwODY4NywicGF5bG9hZCI6eyJ1c2VyX2lkIjoxLCJyb2xlX2lkIjowfX0.R2mcIpb03PuGSTXLtWLEgDdzuJvBkE-F7ukfALlUtKk`
-	mgr, err := CreateHMACToken("./test/secret")
+	mgr, err := CreateHMACToken("1234@sdfdfda}")
 	if err != nil {
 		log.Print(err)
 		t.Fail()

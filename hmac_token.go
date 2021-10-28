@@ -37,7 +37,7 @@ func (t *HMACToken) SetSecret(path string) error {
 
 // GenerateHmacToken is create token with secret
 func (t *HMACToken) GenerateHmacToken(payload interface{}, duration time.Duration) (string, error) {
-	//  make header use algorithm SHA 256
+	//  make header use algorithm HS 256
 	claims := jwt.MapClaims{}
 	bin, err := json.Marshal(payload)
 	if err != nil {
