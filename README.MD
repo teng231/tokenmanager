@@ -1,6 +1,8 @@
 # Tokenmanager
-
 Control flow token generate and parse token.
+
+[![Go](https://github.com/teng231/tokenmanager/actions/workflows/go.yml/badge.svg?branch=master)](https://github.com/teng231/tokenmanager/actions/workflows/go.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/princjef/gomarkdoc.svg)](https://pkg.go.dev/github.com/teng231/tokenmanager)
 
 ## Installing and Usage
 
